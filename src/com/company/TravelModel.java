@@ -1,6 +1,5 @@
 package com.company;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,8 +15,8 @@ public class TravelModel {
     //constructor for the Travel Model - generates a random list of cities with user defined number of destinations
     public TravelModel(int numOfCities) {
         for (int i = 0; i < numOfCities; i++) {
-            int randomX = (int) Math.random() * 1000;  //generates random coordinates on the map in the range of 1 to 1000
-            int randomY = (int) Math.random() * 1000;
+            int randomX = (int) (Math.random() * 1000);  //generates random coordinates on the map in the range of 1 to 1000
+            int randomY = (int) (Math.random() * 1000);
             newTravel.add(new CityNode(randomX, randomY));
         }
     }
@@ -25,7 +24,7 @@ public class TravelModel {
 
     //randomise the list
     public void shuffleList() {
-        if (newTravel.isEmpty() == true) {
+        if (newTravel.isEmpty()) {
             //generate a new Travel List
             new TravelModel(20);
         } else {
@@ -36,8 +35,8 @@ public class TravelModel {
 
 
     public void swapCities() {
-        int i = (int) Math.random() * newTravel.size() - 1;
-        int j = (int) Math.random() * newTravel.size() - 1;
+        int i = (int) (Math.random() * newTravel.size()) - 1;
+        int j = (int) (Math.random() * newTravel.size()) - 1;
         swapCityNodes(i, j);
     }
 
