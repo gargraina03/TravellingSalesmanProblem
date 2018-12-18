@@ -2,6 +2,7 @@ package com.company;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -13,20 +14,47 @@ public class TravelModel {
     private List<CityNode> previousTravel = new ArrayList<>();
 
     //constructor for the Travel Model - generates a random list of cities with user defined number of destinations
-    public TravelModel(int numOfCities){
+    public TravelModel(int numOfCities) {
         for (int i = 0; i < numOfCities; i++) {
-            int randomX = (int)Math.random()*1000;  //generates random coordinates on the map in the range of 1 to 1000
-            int randomY = (int)Math.random()*1000;
-            newTravel.add(new CityNode(randomX,randomY));
+            int randomX = (int) Math.random() * 1000;  //generates random coordinates on the map in the range of 1 to 1000
+            int randomY = (int) Math.random() * 1000;
+            newTravel.add(new CityNode(randomX, randomY));
         }
     }
 
 
-    
+    //randomise the list
+    public void shuffleList() {
+        if (newTravel.isEmpty() == true) {
+            //generate a new Travel List
+            new TravelModel(20);
+        } else {
+            //else shuffle the generated list
+            Collections.shuffle(newTravel);
+        }
+    }
 
 
+    public void swapCities() {
+        int i = (int) Math.random() * newTravel.size() - 1;
+        int j = (int) Math.random() * newTravel.size() - 1;
+        swapCityNodes(i, j);
+    }
+
+    //swap cities at 2 random indices
+    private void swapCityNodes(int i, int j) {
+        previousTravel = newTravel;  //our current list becomes the previous list
+        CityNode cityAti = previousTravel.get(i);
+        CityNode cityAtj = previousTravel.get(j);
+        newTravel.set(i, cityAtj);
+        newTravel.set(j, cityAti);
+    }
 
 
+    //revert the swap if the new distance is greater than the previous one
+    public void revertSwap() {
+        newTravel = previousTravel;
+    }
 
     //function to calculate and sum the distance between the cities in one iteration order
     public int calcDistance() {
