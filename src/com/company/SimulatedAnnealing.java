@@ -31,7 +31,7 @@ public class SimulatedAnnealing {
 
                 if (currDistance < bestDistance) {
                     bestDistance = currDistance;
-                    bestTravel = currTravel;
+
                 } else if (Math.exp((bestDistance - currDistance) / t) < Math.random()) {
                     currTravel.revertSwap();
                 }
@@ -40,14 +40,12 @@ public class SimulatedAnnealing {
                 continue;
             }
 
+            System.out.println(bestDistance);
 
-            bestTravel.display();
         }
 
 
         return;
-
-
     }
 
 

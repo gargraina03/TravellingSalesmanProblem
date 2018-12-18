@@ -50,8 +50,8 @@ public class TravelModel {
     //swap cities at 2 random indices
     private void swapCityNodes(int i, int j) {
         previousTravel = newTravel;  //our current list becomes the previous list
-        CityNode cityAti = previousTravel.get(i);
-        CityNode cityAtj = previousTravel.get(j);
+        CityNode cityAti = newTravel.get(i);
+        CityNode cityAtj = newTravel.get(j);
         newTravel.set(i, cityAtj);
         newTravel.set(j, cityAti);
     }
