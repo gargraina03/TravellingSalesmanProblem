@@ -12,6 +12,13 @@ public class TravelModel {
     private List<CityNode> newTravel = new ArrayList<>();
     private List<CityNode> previousTravel = new ArrayList<>();
 
+    public void display() {
+        System.out.println("displaying the Travel City List -");
+        for (int i = 0; i < newTravel.size(); i++) {
+            System.out.println(newTravel.get(i));
+        }
+    }
+
     //constructor for the Travel Model - generates a random list of cities with user defined number of destinations
     public TravelModel(int numOfCities) {
         for (int i = 0; i < numOfCities; i++) {

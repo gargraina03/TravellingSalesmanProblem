@@ -1,8 +1,6 @@
 package com.company;
 
 
-import java.util.ArrayList;
-
 /**
  * The main simulated annealing class
  * requires 3 parameters - starting temperature, cooling rate, int numberOfIterations
@@ -15,16 +13,39 @@ public class SimulatedAnnealing {
     //constructor for the Simulated Annealing Class
 
 
-    public ArrayList<CityNode> simulate(double initTemperature, double alpha, double thresholdTemp, int numOfItertations) {
+    public void simulate(double initTemperature, double alpha, double thresholdTemp, int numOfItertations) {
+        System.out.println("simulation starting...");
         travel.shuffleList();
-        double optimisedDistance = 0.0;
-        ArrayList<CityNode> optSequence = new ArrayList<>();
-        for (int i = 0; i < numOfItertations; i++) {
+        double t = initTemperature;
+        //modelling 2 travels containing the current and the best possible sequencing
+        TravelModel bestTravel = travel;  //travel container
+        TravelModel currTravel = travel;  //travel container
+        double bestDistance = travel.calcDistance();
+        double currDistance = travel.calcDistance();
 
+
+        for (int i = 0; i < numOfItertations; i++) {
+            if (t > thresholdTemp) {
+                currTravel.swapCities();
+                currDistance = currTravel.calcDistance();
+
+                if (currDistance < bestDistance) {
+                    bestDistance = currDistance;
+                    bestTravel = currTravel;
+                } else if (Math.exp((bestDistance - currDistance) / t) < Math.random()) {
+                    currTravel.revertSwap();
+                }
+                t *= alpha;
+            } else {
+                continue;
+            }
+
+
+            bestTravel.display();
         }
 
 
-        return optSequence;
+        return;
 
 
     }
